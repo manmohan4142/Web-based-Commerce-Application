@@ -5,6 +5,11 @@ import bcrypt from 'bcryptjs';
 import { connectDB } from './db';
 import { User } from './models/User';
 
+// Ensure NEXTAUTH_URL is set for Vercel (required for auth redirects/callbacks)
+if (process.env.VERCEL && !process.env.NEXTAUTH_URL && process.env.VERCEL_URL) {
+  process.env.NEXTAUTH_URL = `https://${process.env.VERCEL_URL}`;
+}
+
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
