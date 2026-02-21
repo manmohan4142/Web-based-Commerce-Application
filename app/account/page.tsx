@@ -3,6 +3,7 @@
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { PageTransition } from '@/components/layout/PageTransition';
 import { Spinner } from '@/components/ui/Spinner';
@@ -35,9 +36,11 @@ export default function AccountPage() {
         >
           <div className="flex items-center gap-4">
             {session.user?.image && (
-              <img
+              <Image
                 src={session.user.image}
                 alt=""
+                width={64}
+                height={64}
                 className="h-16 w-16 rounded-full border-2 border-cyber-neon/30"
               />
             )}

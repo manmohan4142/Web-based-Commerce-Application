@@ -1,10 +1,10 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, HTMLMotionProps } from 'framer-motion';
 import { forwardRef } from 'react';
 import { cn } from '@/lib/utils';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends HTMLMotionProps<'button'> {
   variant?: 'primary' | 'secondary' | 'ghost' | 'outline' | 'danger';
   size?: 'sm' | 'md' | 'lg';
   loading?: boolean;
@@ -19,18 +19,19 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       className,
       variant = 'primary',
       size = 'md',
-      loading,
+      loading = false,
       leftIcon,
       rightIcon,
-      fullWidth,
+      fullWidth = false,
       children,
       disabled,
-      ...props
+      ...rest
     },
     ref
   ) => {
     const base =
       'inline-flex items-center justify-center font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-cyber-neon focus:ring-offset-2 focus:ring-offset-cyber-dark disabled:opacity-50 disabled:pointer-events-none';
+
     const variants = {
       primary:
         'bg-cyber-neon text-cyber-dark hover:shadow-neon active:scale-[0.98]',
@@ -42,6 +43,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       danger:
         'bg-cyber-neon-pink/20 text-cyber-neon-pink border border-cyber-neon-pink/50 hover:bg-cyber-neon-pink/30',
     };
+
     const sizes = {
       sm: 'px-3 py-1.5 text-sm gap-1.5',
       md: 'px-5 py-2.5 text-base gap-2',
@@ -61,7 +63,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           className
         )}
         disabled={disabled || loading}
-        {...props}
+        {...rest}
       >
         {loading ? (
           <span className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
@@ -78,4 +80,5 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 );
 
 Button.displayName = 'Button';
+
 export default Button;
