@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { Suspense, useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
@@ -9,7 +9,7 @@ import { ProductCard } from '@/components/product/ProductCard';
 import { ProductCardSkeleton } from '@/components/ui/Skeleton';
 import type { Product, Category, SortOption } from '@/types';
 
-export default function ShopPage() {
+function ShopContent() {
   const searchParams = useSearchParams();
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -185,5 +185,31 @@ export default function ShopPage() {
         </div>
       </div>
     </PageTransition>
+  );
+}
+
+export default function ShopPage() {
+  return (
+    <Suspense fallback={
+      <PageTransition>
+        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+          <div className="h-9 w-32 bg-cyber-border rounded animate-pulse" />
+          <div className="mt-8 flex flex-col gap-6 lg:flex-row">
+            <aside className="w-full shrink-0 lg:w-64">
+              <div className="rounded-xl border border-cyber-border bg-cyber-card/80 p-4 backdrop-blur-md animate-pulse h-64" />
+            </aside>
+            <div className="flex-1">
+              <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+                {[1, 2, 3, 4, 5, 6].map((i) => (
+                  <ProductCardSkeleton key={i} />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </PageTransition>
+    }>
+      <ShopContent />
+    </Suspense>
   );
 }

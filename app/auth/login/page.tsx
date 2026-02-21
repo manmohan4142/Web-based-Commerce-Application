@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
@@ -9,7 +9,7 @@ import { PageTransition } from '@/components/layout/PageTransition';
 import Button from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 
-export default function LoginPage() {
+function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get('callbackUrl') ?? '/';
@@ -103,5 +103,27 @@ export default function LoginPage() {
         </motion.div>
       </div>
     </PageTransition>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={
+      <PageTransition>
+        <div className="mx-auto flex min-h-[80vh] max-w-md flex-col justify-center px-4 py-12">
+          <div className="rounded-2xl border border-cyber-border bg-cyber-card/80 p-8 backdrop-blur-md animate-pulse">
+            <div className="h-8 w-32 bg-cyber-border rounded" />
+            <div className="mt-2 h-4 w-64 bg-cyber-border rounded" />
+            <div className="mt-8 space-y-6">
+              <div className="h-12 bg-cyber-border rounded" />
+              <div className="h-12 bg-cyber-border rounded" />
+              <div className="h-12 bg-cyber-border rounded" />
+            </div>
+          </div>
+        </div>
+      </PageTransition>
+    }>
+      <LoginForm />
+    </Suspense>
   );
 }
