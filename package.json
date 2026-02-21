@@ -1,0 +1,39 @@
+{
+  "name": "ecommerce-app",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint", "seed": "npx tsx scripts/seed.ts"
+  },
+  "dependencies": {
+    "next": "14.2.15",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "framer-motion": "^11.11.17",
+    "tailwindcss": "^3.4.14",
+    "zustand": "^5.0.1",
+    "next-auth": "^4.24.10",
+    "mongoose": "^8.7.4",
+    "stripe": "^17.2.0",
+    "@stripe/stripe-js": "^4.8.0",
+    "@stripe/react-stripe-js": "^2.8.1",
+    "zod": "^3.23.8",
+    "bcryptjs": "^2.4.3",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.454.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@types/bcryptjs": "^2.4.6",
+    "typescript": "^5.6.3",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "14.2.15",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47", "tsx": "^4.19.2"
+  }
+}
